@@ -19,27 +19,37 @@ let monthlyTotal = 0
 $(document).ready(onReady);
 
 function onReady() {
-    console.log('JQ guh')
-    $("#submitButton").on('click', submitEmployee)
+    console.log('JQ guh');
+    $("#submitButton").on('click', submitEmployee);
 }
 
 function submitEmployee() {
+
     let incomingEmployee = new Employee(
         $('#firstName').val(),
         $('#lastName').val(),
-        $('#identificationNumber').val(),
+        Number($('#identificationNumber').val()),
         $('#title').val(),
-        $('#annualSalary').val());
+        Number($('#annualSalary').val()));
 
-    annualSalaryTotal += Number(incomingEmployee.annualSalary)
+    console.log(incomingEmployee);
+
+    for (property in incomingEmployee) {
+        if (incomingEmployee[property] == '' || 0) {
+            alert('Please fill in all fields before submitting')
+            return false;
+        }
+    }
+
+    annualSalaryTotal += (incomingEmployee.annualSalary);
     monthlyTotal = Math.round(annualSalaryTotal / 12);
 
     $('#outputDisplay').append(`<tr>
             <td>` + incomingEmployee.firstName + `</td>
             <td>` + incomingEmployee.lastName + `</td>
-            <td>` + Number(incomingEmployee.identificationNumber) + `</td>
+            <td>` + incomingEmployee.identificationNumber + `</td>
             <td>` + incomingEmployee.title + `</td>
-            <td>` + Number(incomingEmployee.annualSalary) + `</td>
+            <td>` + incomingEmployee.annualSalary + `</td>
             <td><button class=deleteButton>Remove Employee</button></td>
             </tr>`);
 
