@@ -12,35 +12,38 @@
 </head>
 
 <body>
-    <h1>Salary Calculator</h1>
-    <h2>Add Emplyoee:</h2>
-    <div class="container" id="block-inputForm">
-        <input id="firstName" placeholder="First Name" type="text">
-        <input id="lastName" placeholder="Last Name" type="text">
-        <input id="identificationNumber" placeholder="ID Number" type="number">
-        <input id="title" placeholder="Title" type="text">
-        <input id="annualSalary" placeholder="Annual Salary" type="number">
-        <button id="submitButton">Submit</button>
+    <div id="frame">
+        <marquee>BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY, BIG MONEY, PAYDAY</marquee>
+        <h1>Salary Calculator</h1>
+        <h2>Add Employee:</h2>
+        <div class="container" id="block-inputForm">
+            <input id="firstName" placeholder="First Name" type="text">
+            <input id="lastName" placeholder="Last Name" type="text">
+            <input id="identificationNumber" placeholder="ID Number" type="number">
+            <input id="title" placeholder="Title" type="text">
+            <input id="annualSalary" placeholder="Annual Salary" type="number">
+            <button id="submitButton">Submit</button>
+        </div>
+        <h2>Employees:</h2>
+        <div class="container" id="block-outputTable">
+            <table id="outputTable">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Annual Salary</th>
+                        <th>Remove Employee</th>
+                    </tr>
+                </thead>
+                <tbody class="outputDisplay">
+
+                </tbody>
+            </table>
+        </div>
+        <h2 id="totalMonthly">Total Monthly: $</h2>
     </div>
-    <h2>Employees:</h2>
-    <div class="container" id="block-outputTable">
-        <table id="outputTable" border=1>
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Annual Salary</th>
-                    <th>Remove Employee</th>
-                </tr>
-            </thead>
-            <tbody class="outputDisplay">
-            
-            </tbody>
-        </table>
-    </div>
-    <h2 id="totalMonthly">Total Monthly: $</h2>
 </body>
 
 </html>

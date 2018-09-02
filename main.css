@@ -1,0 +1,20 @@
+body{
+    font-family: Georgia;
+    background-image: url(/Users/tony/prime/tier2/Homework/Weekend1_Salary_Calc/85198154-seamless-money-pattern-with-many-euro-and-dollar-currency-signs-on-white-background-paper-banknotes-.jpg);
+}
+
+#frame{
+    background-color:rgba(0, 173, 176, 0.815);
+    width: 800px;
+    margin: 40px auto 80px;
+    padding: 10px 50px 10px 50px;
+    border-radius: 15px;
+    color: white
+}
+
+#outputTable{
+    border: 1px, solid, white;
+    border-radius: 15px;
+    width: 100%;
+}
+

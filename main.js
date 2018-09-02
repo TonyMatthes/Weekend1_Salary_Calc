@@ -42,17 +42,23 @@ function submitEmployee() {
 
     annualSalaryTotal += (incomingEmployee.annualSalary);
     monthlyTotal = Math.round(annualSalaryTotal / 12);
-
-    // $('#outputDisplay').append(`<tr>
-    //         <td>` + incomingEmployee.firstName + `</td>
-    //         <td>` + incomingEmployee.lastName + `</td>
-    //         <td>` + incomingEmployee.identificationNumber + `</td>
-    //         <td>` + incomingEmployee.title + `</td>
-    //         <td>` + incomingEmployee.annualSalary + `</td>
-    //         <td><button class=deleteButton>Remove Employee</button></td>
-    //         </tr>`);
-
     employeeList.push(incomingEmployee);
+    updateDom()
+    $('input').val('');
+}
+
+function deleteEmployee() {
+
+    let arrayDeleteIndex = Number($(this).attr('id'));
+
+    annualSalaryTotal = annualSalaryTotal - employeeList[arrayDeleteIndex].annualSalary;
+    monthlyTotal = annualSalaryTotal / 12;
+    monthlyTotal = Math.round(monthlyTotal);
+    employeeList.splice(arrayDeleteIndex, 1);
+    updateDom()
+}
+
+function updateDom() {
     $('.outputDisplay').empty();
     for (let i = 0; i < employeeList.length; i++) {
         $('.outputDisplay').prepend(
@@ -65,10 +71,6 @@ function submitEmployee() {
             <td><button id="` + i + `" class="deleteButton">Remove Employee</button></td>
             </tr>`)
     };
-
-    // } attempted loop for array
-
-
 
     $('#totalMonthly').replaceWith(
         '<h2 id="totalMonthly">Total Monthly: $'
@@ -78,35 +80,4 @@ function submitEmployee() {
     if (monthlyTotal > 20000) {
         $('#totalMonthly').css('background-color', 'red');
     };
-
-    $('input').val('');
-}
-
-function deleteEmployee() {
-
-    let arrayDeleteIndex = Number($(this).attr('id'));
-
-    annualSalaryTotal = annualSalaryTotal - employeeList[arrayDeleteIndex].annualSalary;
-    monthlyTotal = Math.round(annualSalaryTotal / 12);
-    employeeList.splice(arrayDeleteIndex);
-
-    $('#totalMonthly').replaceWith(
-        '<h2 id="totalMonthly">Total Monthly: $'
-        + monthlyTotal
-        + '</h2>');
-
-    $('.outputDisplay').empty();
-
-    for (let i = 0; i < employeeList.length; i++) {
-        $('.outputDisplay').prepend(
-            `<tr>
-            <td>` + employeeList[i].firstName + `</td>
-            <td>` + employeeList[i].lastName + `</td>
-            <td>` + employeeList[i].identificationNumber + `</td>
-            <td>` + employeeList[i].title + `</td>
-            <td>` + employeeList[i].annualSalary + `</td>
-            <td><button id="` + i + `" class="deleteButton">Remove Employee</button></td>
-            </tr>`)
-    };
-    
 }
