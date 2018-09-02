@@ -4,24 +4,27 @@ class Employee {
     constructor(firstName, lastName, identificationNumber, title, annualSalary) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.identificationNumber = identificationNumber
-        this.title = title
-        this.annualSalary = annualSalary
+        this.identificationNumber = identificationNumber;
+        this.title = title;
+        this.annualSalary = annualSalary;
     }
 }
 
-let employeeList = []
+let employeeList = [];
 
-let annualSalaryTotal = 0
+let deletedEmployees= [];
 
-let monthlyTotal = Math.round(annualSalaryTotal / 12)
+let annualSalaryTotal = 0;
+
+let monthlyTotal = Math.round(annualSalaryTotal / 12);
 
 $(document).ready(onReady);
 
 function onReady() {
     console.log('JQ guh');
     $("#submitButton").on('click', submitEmployee);
-    $('#outputTable').on('click', '.deleteButton', deleteEmployee)
+    $('#outputTable').on('click', '.deleteButton', deleteEmployee);
+    $('#undoButton').on('click', undoDeletion);
 }
 
 function submitEmployee() {
@@ -35,7 +38,7 @@ function submitEmployee() {
 
     for (property in incomingEmployee) {
         if (incomingEmployee[property] == '' || 0) {
-            alert('Please fill in all fields before submitting')
+            alert('Please fill in all fields before submitting');
             return false;
         }
     }
@@ -43,7 +46,7 @@ function submitEmployee() {
     annualSalaryTotal += (incomingEmployee.annualSalary);
     monthlyTotal = Math.round(annualSalaryTotal / 12);
     employeeList.push(incomingEmployee);
-    updateDom()
+    updateDom();
     $('input').val('');
 }
 
@@ -54,8 +57,16 @@ function deleteEmployee() {
     annualSalaryTotal = annualSalaryTotal - employeeList[arrayDeleteIndex].annualSalary;
     monthlyTotal = annualSalaryTotal / 12;
     monthlyTotal = Math.round(monthlyTotal);
-    employeeList.splice(arrayDeleteIndex, 1);
-    updateDom()
+    deletedEmployees = deletedEmployees.concat(employeeList.splice(arrayDeleteIndex, 1));
+    updateDom();
+}
+
+function undoDeletion(){
+employeeList = employeeList.concat(deletedEmployees.splice(deletedEmployees[deletedEmployees.length - 1], 1));
+annualSalaryTotal += employeeList[employeeList.length-1].annualSalary;
+monthlyTotal = annualSalaryTotal / 12;
+monthlyTotal = Math.round(monthlyTotal);
+updateDom();
 }
 
 function updateDom() {
@@ -69,15 +80,15 @@ function updateDom() {
             <td>` + employeeList[i].title + `</td>
             <td>` + employeeList[i].annualSalary + `</td>
             <td><button id="` + i + `" class="deleteButton">Remove Employee</button></td>
-            </tr>`)
+            </tr>`);
     };
 
     $('#totalMonthly').replaceWith(
-        '<h2 id="totalMonthly">Total Monthly: $'
-        + monthlyTotal
-        + '</h2>');
+        '<h2 id="totalMonthly">Total Monthly: $' +
+        monthlyTotal +
+        '</h2>');
 
     if (monthlyTotal > 20000) {
         $('#totalMonthly').css('background-color', 'red');
-    };
+    }
 }

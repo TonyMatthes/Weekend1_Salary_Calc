@@ -3,6 +3,12 @@ body{
     background-image: url(/Users/tony/prime/tier2/Homework/Weekend1_Salary_Calc/85198154-seamless-money-pattern-with-many-euro-and-dollar-currency-signs-on-white-background-paper-banknotes-.jpg);
 }
 
+.container{
+    width: 80%;
+    margin:20px;
+    border: 1px, solid, black;
+}
+
 #frame{
     background-color:rgba(0, 173, 176, 0.815);
     width: 800px;
@@ -12,8 +18,8 @@ body{
     color: white
 }
 
-#outputTable{
-    border: 1px, solid, white;
+thead{
+    border: 3px, solid, white;
     border-radius: 15px;
     width: 100%;
 }
