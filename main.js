@@ -1,5 +1,3 @@
-console.log('guh');
-
 class Employee {
     constructor(firstName, lastName, identificationNumber, title, annualSalary) {
         this.firstName = firstName;
@@ -12,19 +10,32 @@ class Employee {
 
 let employeeList = [];
 
-let deletedEmployees= [];
+let deletedEmployees = [];
 
-let annualSalaryTotal = 0;
+let annualSalaryTotal = 0
 
-let monthlyTotal = Math.round(annualSalaryTotal / 12);
+let monthlyTotal = 0
 
 $(document).ready(onReady);
 
 function onReady() {
-    console.log('JQ guh');
     $("#submitButton").on('click', submitEmployee);
+   
     $('#outputTable').on('click', '.deleteButton', deleteEmployee);
+    
     $('#undoButton').on('click', undoDeletion);
+}
+
+function calculateMonthlyTotal() {
+    annualSalaryTotal = 0;
+    
+    for (let i = 0; i < employeeList.length; i++){
+        annualSalaryTotal += employeeList[i].annualSalary;
+    };
+   
+    monthlyTotal = annualSalaryTotal / 12;
+   
+    monthlyTotal = Math.round(monthlyTotal);
 }
 
 function submitEmployee() {
@@ -39,34 +50,26 @@ function submitEmployee() {
     for (property in incomingEmployee) {
         if (incomingEmployee[property] == '' || 0) {
             alert('Please fill in all fields before submitting');
-            return false;
+            return;
         }
     }
 
-    annualSalaryTotal += (incomingEmployee.annualSalary);
-    monthlyTotal = Math.round(annualSalaryTotal / 12);
     employeeList.push(incomingEmployee);
     updateDom();
     $('input').val('');
 }
 
 function deleteEmployee() {
-
     let arrayDeleteIndex = Number($(this).attr('id'));
-
-    annualSalaryTotal = annualSalaryTotal - employeeList[arrayDeleteIndex].annualSalary;
-    monthlyTotal = annualSalaryTotal / 12;
-    monthlyTotal = Math.round(monthlyTotal);
+    
     deletedEmployees = deletedEmployees.concat(employeeList.splice(arrayDeleteIndex, 1));
+    
     updateDom();
 }
 
-function undoDeletion(){
-employeeList = employeeList.concat(deletedEmployees.splice(deletedEmployees[deletedEmployees.length - 1], 1));
-annualSalaryTotal += employeeList[employeeList.length-1].annualSalary;
-monthlyTotal = annualSalaryTotal / 12;
-monthlyTotal = Math.round(monthlyTotal);
-updateDom();
+function undoDeletion() {
+    employeeList = employeeList.concat(deletedEmployees.splice(deletedEmployees[deletedEmployees.length - 1], 1));
+    updateDom();
 }
 
 function updateDom() {
@@ -83,10 +86,10 @@ function updateDom() {
             </tr>`);
     };
 
+    calculateMonthlyTotal();
+
     $('#totalMonthly').replaceWith(
-        '<h2 id="totalMonthly">Total Monthly: $' +
-        monthlyTotal +
-        '</h2>');
+        '<h2 id="totalMonthly">Total Monthly: $' + monthlyTotal + '</h2>');
 
     if (monthlyTotal > 20000) {
         $('#totalMonthly').css('background-color', 'red');
