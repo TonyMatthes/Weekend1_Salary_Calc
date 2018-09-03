@@ -12,6 +12,8 @@ let employeeList = [];
 
 let deletedEmployees = [];
 
+let arrayDeleteIndex = 0
+
 let annualSalaryTotal = 0
 
 let monthlyTotal = 0
@@ -60,7 +62,7 @@ function submitEmployee() {
 }
 
 function deleteEmployee() {
-    let arrayDeleteIndex = Number($(this).attr('id'));
+    arrayDeleteIndex = Number($(this).attr('id'));
     
     deletedEmployees = deletedEmployees.concat(employeeList.splice(arrayDeleteIndex, 1));
     
@@ -68,7 +70,7 @@ function deleteEmployee() {
 }
 
 function undoDeletion() {
-    employeeList = employeeList.concat(deletedEmployees.splice(deletedEmployees[deletedEmployees.length - 1], 1));
+    employeeList = employeeList.concat(deletedEmployees.splice(deletedEmployees.length-1,1));
     updateDom();
 }
 
