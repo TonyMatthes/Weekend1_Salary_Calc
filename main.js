@@ -22,21 +22,21 @@ $(document).ready(onReady);
 
 function onReady() {
     $("#submitButton").on('click', submitEmployee);
-   
+
     $('#outputTable').on('click', '.deleteButton', deleteEmployee);
-    
+
     $('#undoButton').on('click', undoDeletion);
 }
 
 function calculateMonthlyTotal() {
     annualSalaryTotal = 0;
-    
-    for (let i = 0; i < employeeList.length; i++){
+
+    for (let i = 0; i < employeeList.length; i++) {
         annualSalaryTotal += employeeList[i].annualSalary;
     };
-   
+
     monthlyTotal = annualSalaryTotal / 12;
-   
+
     monthlyTotal = Math.round(monthlyTotal);
 }
 
@@ -63,14 +63,14 @@ function submitEmployee() {
 
 function deleteEmployee() {
     arrayDeleteIndex = Number($(this).attr('id'));
-    
+
     deletedEmployees = deletedEmployees.concat(employeeList.splice(arrayDeleteIndex, 1));
-    
+
     updateDom();
 }
 
 function undoDeletion() {
-    employeeList = employeeList.concat(deletedEmployees.splice(deletedEmployees.length-1,1));
+    employeeList = employeeList.concat(deletedEmployees.splice(deletedEmployees.length - 1, 1));
     updateDom();
 }
 
@@ -87,7 +87,7 @@ function updateDom() {
             <td><button id="` + i + `" class="deleteButton">Remove Employee</button></td>
             </tr>`);
     };
-
+   
     calculateMonthlyTotal();
 
     $('#totalMonthly').replaceWith(
@@ -95,5 +95,12 @@ function updateDom() {
 
     if (monthlyTotal > 20000) {
         $('#totalMonthly').css('background-color', 'red');
+    }
+
+    if (deletedEmployees.length > 0){
+        $('#undoButton').prop('disabled', false);
+    }
+    else{
+        $('#undoButton').prop('disabled', true);
     }
 }
